@@ -1,0 +1,4 @@
+ 1.vim /usr/lib/systemd/system/jenkins.service
+  2.change port number "JENKINS_PORT=9999"
+  3. systemctl daemon-reload
+  4.systemctl restart jenkins
