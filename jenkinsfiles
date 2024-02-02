@@ -1,0 +1,33 @@
+pipeline {
+    agent any
+
+    tools {
+        maven "maven-3.9.6"
+    }
+
+    environment {
+        WORKSPACE = "${JENKINS_HOME}/your-jenkins-job-directory"
+        DOCKERHUB_CREDENTIALS = "DJDJDJSLJDLJL"
+    }
+
+    stages {
+        stage('SCM Checkout') {
+            steps {
+                script {
+                    // Git checkout step without credentials
+                    checkout([$class: 'GitSCM', branches: [[name: 'master']], userRemoteConfigs: [[url: 'https://github.com/IBM-batch/insurance-web-application.git']]])
+                }
+            }
+        }
+
+        stage('Maven Build') {
+            steps {
+                script {
+                    // Maven build step
+                    echo "Compiling and creating artifacts: .jar or .war"
+                    sh "mvn clean package"
+                }
+            }
+        }
+    }
+}
